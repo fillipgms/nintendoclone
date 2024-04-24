@@ -14,10 +14,11 @@ import NintendoLogo from "@/public/NintendoLogo";
 import Image from "next/image";
 
 const Header = () => {
-    const linkStyle = "flex items-center gap-1";
+    const linkStyle =
+        "flex items-center gap-1 hover:text-nintendoRed cursor-pointer";
 
     return (
-        <header className="bg-white border-2 text-sm border-nintendoLightGray text-nintendoGray font-bold">
+        <header className="bg-white border-2  border-nintendoLightGray text-nintendoGray font-bold">
             <div className="flex justify-between border-b-2 border-nintendoLightGray ">
                 <div className="flex items-center gap-3">
                     <div className="bg-nintendoRed text-white h-full  flex items-center justify-center px-5">
@@ -25,7 +26,7 @@ const Header = () => {
                     </div>
                     <div>SearchBar</div>
                 </div>
-                <div className="flex gap-6 items-center py-3 pr-8">
+                <div className="flex gap-6  items-center py-3 pr-8">
                     <div className={linkStyle}>
                         <RiQuestionnaireFill />
                         Assistência
@@ -44,7 +45,7 @@ const Header = () => {
                 </div>
             </div>
             <div>
-                <ul className="flex gap-6 justify-center py-3">
+                <ul className="flex gap-6  justify-center py-3">
                     <li className={linkStyle}>
                         <BiSolidJoystickButton />
                         Jogos
