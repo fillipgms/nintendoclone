@@ -1,10 +1,10 @@
-import GamgeHero from "@/components/GamgeHero";
+import GameHero from "@/components/GameHero";
 
-export default function Home() {
+export default async function Home() {
     return (
         <main>
             <section className="bg-nintendoLightBlue relative">
-                <GamgeHero />
+                <GameHero />
             </section>
         </main>
     );

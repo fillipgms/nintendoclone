@@ -6,9 +6,9 @@ import { FiDownload } from "react-icons/fi";
 import coin from "@/public/my-nintendo-gold-coin.avif";
 import GameImagesCaroussel from "./GameImagesCaroussel";
 
-const GamgeHero = () => {
+const GameHero = () => {
     return (
-        <div className="max-w-7xl py-6 px-14 space-y-3 bg-white text-nintendoGray mx-auto shadow-xl rounded-xl translate-y-8">
+        <div className="md:max-w-7xl w-full py-6 md:px-14 px-4 space-y-3 bg-white text-nintendoGray mx-auto shadow-xl rounded-xl md:translate-y-8">
             <div>
                 <ol className="flex capitalize gap-5 text-xs  font-bold ">
                     <li>Loja</li>
@@ -16,7 +16,7 @@ const GamgeHero = () => {
                     <li>Stardew Valley</li>
                 </ol>
             </div>
-            <div className="flex gap-12">
+            <div className="flex md:flex-row flex-col gap-12">
                 <div className=" flex-[1.5_1.5_0]">
                     <GameImagesCaroussel />
                 </div>
@@ -49,4 +49,4 @@ const GamgeHero = () => {
     );
 };
 
-export default GamgeHero;
+export default GameHero;
