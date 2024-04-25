@@ -23,10 +23,10 @@ interface Game {
         width: number;
         height: number;
     };
-    // Adicione os outros campos conforme necessário
+    screenshots?: number[];
 }
 
-const igdbUrl = "https://api.igdb.com/v4/";
+const igdbUrl = "https://api.igdb.com/v4";
 
 const fetchAccessToken = async () => {
     const tokenResponse = await axios.post(
@@ -44,7 +44,7 @@ const fetchAccessToken = async () => {
     return tokenResponse.data.access_token;
 };
 
-export const fetchGames = async () => {
+export const fetchTenGames = async () => {
     const accessToken = await fetchAccessToken();
 
     const gamesResponse = await axios.post(`${igdbUrl}games`, null, {
@@ -57,12 +57,12 @@ export const fetchGames = async () => {
     return gamesResponse.data;
 };
 
-export const fetchSpecificGame = async (gameName: string) => {
+export const getSpecificGame = async (gameName: string) => {
     const accessToken = await fetchAccessToken();
 
     const specificGameResponse = await axios.post(
-        `${igdbUrl}games`,
-        `fields age_ratings,aggregated_rating,aggregated_rating_count,alternative_names,artworks,bundles,category,checksum,collection,collections,cover,created_at,dlcs,expanded_games,expansions,external_games,first_release_date,follows,forks,franchise,franchises,game_engines,game_localizations,game_modes,genres,hypes,involved_companies,keywords,language_supports,multiplayer_modes,name,parent_game,platforms,player_perspectives,ports,rating,rating_count,release_dates,remakes,remasters,screenshots,similar_games,slug,standalone_expansions,status,storyline,summary,tags,themes,total_rating,total_rating_count,updated_at,url,version_parent,version_title,videos,websites,thumbnails; where name = "${gameName}";`,
+        `${igdbUrl}/games`,
+        `fields age_ratings, cover, artworks, category, collection, genres, name, rating, screenshots, url, videos; where name = "${gameName}";`,
         {
             headers: {
                 "Client-ID": clientId,
@@ -71,29 +71,5 @@ export const fetchSpecificGame = async (gameName: string) => {
         }
     );
 
-    if (specificGameResponse.data.length === 0) {
-        throw new Error(`Jogo "${gameName}" não encontrado.`);
-    }
-
-    const coverId = specificGameResponse.data[0].cover;
-
-    let coverDetails = null;
-    if (coverId) {
-        const coverResponse = await axios.post(
-            `${igdbUrl}covers`,
-            `fields alpha_channel,animated,checksum,game,game_localization,height,image_id,url,width; where id = ${coverId};`,
-            {
-                headers: {
-                    "Client-ID": clientId,
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            }
-        );
-        coverDetails = coverResponse.data[0];
-    }
-
-    return {
-        info: specificGameResponse.data[0],
-        cover: coverDetails,
-    };
+    return specificGameResponse.data;
 };

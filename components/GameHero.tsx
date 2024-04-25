@@ -6,7 +6,7 @@ import { FiDownload } from "react-icons/fi";
 import coin from "@/public/my-nintendo-gold-coin.avif";
 import GameImagesCaroussel from "./GameImagesCaroussel";
 
-const GameHero = () => {
+const GameHero = (game: models.Game) => {
     return (
         <div className="md:max-w-7xl w-full py-6 md:px-14 px-4 space-y-3 bg-white text-nintendoGray mx-auto shadow-xl rounded-xl md:translate-y-8">
             <div>
@@ -24,7 +24,7 @@ const GameHero = () => {
                     <span className="border-l-[3px] pl-2 border-nintendoRed capitalize font-light text-sm">
                         Nintendo Switch
                     </span>
-                    <h1 className="text-3xl font-bold">Stardew Valley</h1>
+                    <h1 className="text-3xl font-bold">{game.name}</h1>
                     <div className="flex justify-between">
                         <h2 className="text-2xl font-bold">R$ 24,99</h2>
                         <div className="text-nintendoRed text-2xl">
