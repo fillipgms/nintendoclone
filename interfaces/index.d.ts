@@ -8,8 +8,38 @@ namespace models {
         id: number;
         name: string;
         rating: number;
-        screenshots: string;
+        screenshots: number[];
         url: string;
-        videos: string;
+        videos: number[];
+    }
+
+    interface Cover {
+        alpha_channel: boolean;
+        animated: boolean;
+        checksum: number;
+        game: number;
+        game_localization: number;
+        height: number;
+        image_id: number;
+        url: string;
+        width: number;
+    }
+
+    interface Video {
+        checksum: number;
+        game: number;
+        name: string;
+        video_id: string;
+    }
+
+    interface Screenshots {
+        alpha_channel: boolean;
+        animated: boolean;
+        checksum: number;
+        game: number;
+        height: number;
+        image_id: number;
+        url: string;
+        width: number;
     }
 }

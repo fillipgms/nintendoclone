@@ -73,3 +73,55 @@ export const getSpecificGame = async (gameName: string) => {
 
     return specificGameResponse.data;
 };
+
+export const getArtworkById = async (
+    coverId: number,
+    videosIds: number[],
+    screenshotsIds: number[]
+) => {
+    const accessToken = await fetchAccessToken();
+    const artworks = { cover: {}, videos: [], screenshots: [] };
+
+    // Obter capa
+    const coverResponse = await axios.post<{ data: models.Cover }>(
+        `${igdbUrl}/covers`,
+        `fields alpha_channel,animated,checksum,game,game_localization,height,image_id,url,width; where id = ${coverId};`,
+        {
+            headers: {
+                "Client-ID": clientId,
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+    artworks.cover = coverResponse.data;
+
+    for (const id of videosIds) {
+        const response = await axios.post(
+            `${igdbUrl}/game_videos`,
+            `fields checksum,game,name,video_id; where id = ${id};`,
+            {
+                headers: {
+                    "Client-ID": clientId,
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        artworks.videos.push(response.data as models.Video[]);
+    }
+
+    for (const id of screenshotsIds) {
+        const response = await axios.post(
+            `${igdbUrl}/screenshots`,
+            `fields alpha_channel,animated,checksum,game,height,image_id,url,width; where id = ${id};`,
+            {
+                headers: {
+                    "Client-ID": clientId,
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        artworks.screenshots.push(response.data as models.Screenshots[]);
+    }
+
+    return artworks;
+};

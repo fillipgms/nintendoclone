@@ -18,7 +18,7 @@ const GameHero = (game: models.Game) => {
             </div>
             <div className="flex md:flex-row flex-col gap-12">
                 <div className=" flex-[1.5_1.5_0]">
-                    <GameImagesCaroussel />
+                    <GameImagesCaroussel {...game} />
                 </div>
                 <div className="flex-1 space-y-5">
                     <span className="border-l-[3px] pl-2 border-nintendoRed capitalize font-light text-sm">
@@ -33,7 +33,7 @@ const GameHero = (game: models.Game) => {
                     </div>
 
                     <div className="flex items-center text-sm gap-3">
-                        <Image {...coin} alt="coin" width={20} />
+                        <Image {...coin} alt="coin" width={20} height={20} />
                         <p>
                             Elegível para até{" "}
                             <span className="font-bold">17</span> pontos de ouro
