@@ -82,8 +82,7 @@ export const getArtworkById = async (
     const accessToken = await fetchAccessToken();
     const artworks = { cover: {}, videos: [], screenshots: [] };
 
-    // Obter capa
-    const coverResponse = await axios.post<{ data: models.Cover }>(
+    const coverPromise = axios.post<{ data: models.Cover }>(
         `${igdbUrl}/covers`,
         `fields alpha_channel,animated,checksum,game,game_localization,height,image_id,url,width; where id = ${coverId};`,
         {
@@ -93,10 +92,9 @@ export const getArtworkById = async (
             },
         }
     );
-    artworks.cover = coverResponse.data;
 
-    for (const id of videosIds) {
-        const response = await axios.post(
+    const videosPromises = videosIds.map((id) =>
+        axios.post(
             `${igdbUrl}/game_videos`,
             `fields checksum,game,name,video_id; where id = ${id};`,
             {
@@ -105,12 +103,11 @@ export const getArtworkById = async (
                     Authorization: `Bearer ${accessToken}`,
                 },
             }
-        );
-        artworks.videos.push(response.data as models.Video[]);
-    }
+        )
+    );
 
-    for (const id of screenshotsIds) {
-        const response = await axios.post(
+    const screenshotsPromises = screenshotsIds.map((id) =>
+        axios.post(
             `${igdbUrl}/screenshots`,
             `fields alpha_channel,animated,checksum,game,height,image_id,url,width; where id = ${id};`,
             {
@@ -119,9 +116,23 @@ export const getArtworkById = async (
                     Authorization: `Bearer ${accessToken}`,
                 },
             }
-        );
-        artworks.screenshots.push(response.data as models.Screenshots[]);
-    }
+        )
+    );
+
+    const [coverResponse, videosResponses, screenshotsResponses] =
+        await Promise.all([
+            coverPromise,
+            Promise.all(videosPromises),
+            Promise.all(screenshotsPromises),
+        ]);
+
+    artworks.cover = coverResponse.data;
+    artworks.videos = videosResponses.map(
+        (response) => response.data as models.Video
+    );
+    artworks.screenshots = screenshotsResponses.map(
+        (response) => response.data as models.Screenshots
+    );
 
     return artworks;
 };

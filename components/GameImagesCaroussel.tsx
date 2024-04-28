@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const GameImagesCarousel = (game: models.Game) => {
+    const carousselThumbnailStyles = "aspect-video object-cover";
     const [imagesAndVideos, setImagesAndVideos] = useState<any>(null);
 
     useEffect(() => {
@@ -43,6 +44,7 @@ const GameImagesCarousel = (game: models.Game) => {
                             width={1280}
                             height={720}
                             alt={game.name}
+                            className={carousselThumbnailStyles}
                         />
                     </li>
                     <li>
@@ -53,6 +55,7 @@ const GameImagesCarousel = (game: models.Game) => {
                             width={1280}
                             height={720}
                             alt={game.name}
+                            className={carousselThumbnailStyles}
                         />
                     </li>
 
@@ -63,6 +66,7 @@ const GameImagesCarousel = (game: models.Game) => {
                                 width={1280}
                                 height={720}
                                 alt={game.name}
+                                className={carousselThumbnailStyles}
                             />
                         </li>
                     ))}
