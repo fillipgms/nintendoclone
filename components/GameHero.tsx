@@ -6,7 +6,7 @@ import { FiDownload } from "react-icons/fi";
 import coin from "@/public/my-nintendo-gold-coin.avif";
 import GameImagesCaroussel from "./GameImagesCaroussel";
 
-const GameHero = (game: models.Game) => {
+const GameHero = ({ game }: { game: models.Game }) => {
     return (
         <div className="md:max-w-7xl w-full py-6 md:px-14 px-4 space-y-3 bg-white text-nintendoGray mx-auto shadow-xl rounded-xl md:translate-y-8">
             <div>
