@@ -3,8 +3,10 @@ import { getArtworkById } from "@/api/igdb";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const GameImagesCarousel = (game: models.Game) => {
+    const arrowStyles = "absolute h-full z-10 text-white text-3xl px-4";
     const carousselStyles = "flex-[0_0_100%]";
     const carousselThumbnailStyles =
         "aspect-video min-w-16 rounded-xl cursor-pointer object-cover overflow-hidden relative after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute hover:after:bottom-0 after:transition-all after:duration-300 after:-bottom-10 before:block before:w-full before:h-full before:bg-white/25 hover:before:bg-transparent before:absolute";
@@ -49,6 +51,16 @@ const GameImagesCarousel = (game: models.Game) => {
     return (
         <div className="w-full">
             <div className="aspect-video rounded-2xl overflow-hidden relative">
+                <button
+                    className={cn(arrowStyles, "left-0")}
+                    onClick={() => {
+                        goToSlide(
+                            carouselIndex - 1 < 1 ? 7 : carouselIndex - 1
+                        );
+                    }}
+                >
+                    <IoIosArrowBack />
+                </button>
                 <ul
                     className="flex absolute"
                     style={{
@@ -87,10 +99,20 @@ const GameImagesCarousel = (game: models.Game) => {
                         </li>
                     ))}
                 </ul>
+                <button
+                    className={cn(arrowStyles, "right-0")}
+                    onClick={() => {
+                        goToSlide(
+                            carouselIndex + 1 > 7 ? 1 : carouselIndex + 1
+                        );
+                    }}
+                >
+                    <IoIosArrowForward />
+                </button>
             </div>
 
             <div className="mt-8">
-                <ul className="flex gap-3 md:scroll-x-none overflow-x-scroll">
+                <ul className="flex gap-3 overflow-x-scroll">
                     <li
                         className={cn(
                             carousselThumbnailStyles,
@@ -148,7 +170,7 @@ const GameImagesCarousel = (game: models.Game) => {
                     )}
                 </ul>
             </div>
-            <div className="mt-8">10 ANOS</div>
+            <div className="mt-8 hidden md:block">10 ANOS</div>
         </div>
     );
 };
