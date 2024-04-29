@@ -1,11 +1,16 @@
 "use client";
 import { getArtworkById } from "@/api/igdb";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const GameImagesCarousel = (game: models.Game) => {
     const carousselStyles = "flex-[0_0_100%]";
-    const carousselThumbnailStyles = "aspect-video cursor-pointer object-cover";
+    const carousselThumbnailStyles =
+        "aspect-video min-w-16 rounded-xl cursor-pointer object-cover overflow-hidden relative after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute hover:after:bottom-0 after:transition-all after:duration-300 after:-bottom-10 before:block before:w-full before:h-full before:bg-white/25 hover:before:bg-transparent before:absolute";
+
+    const activeSlide =
+        "after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute after:bottom-0 before:bg-transparent";
 
     const imageUrl = (imageId: string) => {
         return `https://images.igdb.com/igdb/image/upload/t_original/${imageId}.webp`;
@@ -43,7 +48,7 @@ const GameImagesCarousel = (game: models.Game) => {
 
     return (
         <div className="w-full">
-            <div className=" aspect-video rounded-2xl overflow-hidden relative">
+            <div className="aspect-video rounded-2xl overflow-hidden relative">
                 <ul
                     className="flex absolute"
                     style={{
@@ -85,20 +90,32 @@ const GameImagesCarousel = (game: models.Game) => {
             </div>
 
             <div className="mt-8">
-                <ul className=" flex gap-3">
-                    <li>
+                <ul className="flex gap-3 md:scroll-x-none overflow-x-scroll">
+                    <li
+                        className={cn(
+                            carousselThumbnailStyles,
+                            carouselIndex === 1 ? activeSlide : ""
+                        )}
+                        onClick={() => {
+                            goToSlide(1);
+                        }}
+                    >
                         <Image
                             src={imageUrl(imagesAndVideos.cover[0].image_id)}
                             width={1280}
                             height={720}
                             alt={game.name}
-                            className={carousselThumbnailStyles}
-                            onClick={() => {
-                                goToSlide(1);
-                            }}
                         />
                     </li>
-                    <li>
+                    <li
+                        className={cn(
+                            carousselThumbnailStyles,
+                            carouselIndex === 2 ? activeSlide : ""
+                        )}
+                        onClick={() => {
+                            goToSlide(2);
+                        }}
+                    >
                         <Image
                             src={thumbnailUrl(
                                 imagesAndVideos.videos[0][0].video_id
@@ -106,25 +123,25 @@ const GameImagesCarousel = (game: models.Game) => {
                             width={1280}
                             height={720}
                             alt={game.name}
-                            className={carousselThumbnailStyles}
-                            onClick={() => {
-                                goToSlide(2);
-                            }}
                         />
                     </li>
 
                     {imagesAndVideos.screenshots.map(
                         (screenshot: any, i: number) => (
-                            <li>
+                            <li
+                                className={cn(
+                                    carousselThumbnailStyles,
+                                    carouselIndex === i + 3 ? activeSlide : ""
+                                )}
+                                onClick={() => {
+                                    goToSlide(i + 3);
+                                }}
+                            >
                                 <Image
                                     src={imageUrl(screenshot[0].image_id)}
                                     width={1280}
                                     height={720}
                                     alt={game.name}
-                                    className={carousselThumbnailStyles}
-                                    onClick={() => {
-                                        goToSlide(i + 2);
-                                    }}
                                 />
                             </li>
                         )

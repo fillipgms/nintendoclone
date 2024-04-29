@@ -8,6 +8,8 @@ import { BiSolidJoystickButton } from "react-icons/bi";
 import { IoChatboxEllipses } from "react-icons/io5";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { FaHeart } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaSearch } from "react-icons/fa";
 
 import { MdPerson } from "react-icons/md";
 import NintendoLogo from "@/public/NintendoLogo";
@@ -66,6 +68,25 @@ const Header = () => {
                     <li className={linkStyle}>
                         <IoChatboxEllipses />
                         Novidades e eventos
+                    </li>
+                </ul>
+            </div>
+            <div className="md:hidden bg-white fixed bottom-4 w-[95%] z-20 shadow-2xl rounded-full  left-1/2 -translate-x-1/2">
+                <ul className="flex text-3xl justify-between px-6 items-center">
+                    <li>
+                        <GiHamburgerMenu />
+                    </li>
+                    <li>
+                        <FaHeart />
+                    </li>
+                    <li className="bg-nintendoRed text-white py-4 px-4 -translate-y-4 rounded-full">
+                        <FaSearch />
+                    </li>
+                    <li>
+                        <BiSolidJoystickButton />
+                    </li>
+                    <li>
+                        <MdPerson />
                     </li>
                 </ul>
             </div>
