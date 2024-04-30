@@ -8,7 +8,7 @@ interface ButtonProps {
 
 const Button = ({ text, icon }: ButtonProps) => {
     return (
-        <button className="flex items-center text-2xl gap-3 justify-center w-full bg-nintendoRed hover:bg-[rgb(172,_0,_13)] transition-all text-white py-3 rounded-xl font-bold">
+        <button className="hover:animate-button-hover flex items-center text-2xl gap-3 justify-center w-full bg-nintendoRed hover:bg-[rgb(172,_0,_13)] transition-all text-white py-4 rounded-xl font-bold">
             {icon}
             {text}
         </button>

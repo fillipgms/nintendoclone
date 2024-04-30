@@ -1,3 +1,4 @@
+import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -73,10 +74,16 @@ const config = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                pulsing: {
+                    "0%, 20%, 50%, 80%, 100%": { transform: "scale(1)" },
+                    "40%": { transform: "scale(1.06)" },
+                    "60%": { transform: "scale(1.03)" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "button-hover": "pulsing 1s ease",
             },
         },
     },

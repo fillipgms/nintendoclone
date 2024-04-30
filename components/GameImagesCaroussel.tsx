@@ -4,12 +4,14 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { MdOutlinePlayCircle } from "react-icons/md";
+import YouTube from "react-youtube";
 
 const GameImagesCarousel = (game: models.Game) => {
     const arrowStyles = "absolute h-full z-10 text-white text-3xl px-4";
     const carousselStyles = "flex-[0_0_100%]";
     const carousselThumbnailStyles =
-        "aspect-video min-w-16 rounded-xl cursor-pointer object-cover overflow-hidden relative after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute hover:after:bottom-0 after:transition-all after:duration-300 after:-bottom-10 before:block before:w-full before:h-full before:bg-white/25 hover:before:bg-transparent before:absolute";
+        "aspect-video min-w-16 rounded-xl cursor-pointer object-center overflow-hidden relative after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute hover:after:bottom-0 after:transition-all after:duration-300 after:-bottom-10 before:block before:w-full before:h-full before:bg-white/25 hover:before:bg-transparent before:absolute";
 
     const activeSlide =
         "after:h-1 after:w-full after:bg-nintendoRed after:block after:absolute after:bottom-0 before:bg-transparent";
@@ -79,13 +81,8 @@ const GameImagesCarousel = (game: models.Game) => {
                         />
                     </li>
                     <li className={carousselStyles}>
-                        <Image
-                            src={thumbnailUrl(
-                                imagesAndVideos.videos[0][0].video_id
-                            )}
-                            width={1280}
-                            height={720}
-                            alt={game.name}
+                        <YouTube
+                            videoId={imagesAndVideos.videos[0][0].video_id}
                         />
                     </li>
                     {imagesAndVideos.screenshots.map((screenshot: any) => (
@@ -132,12 +129,17 @@ const GameImagesCarousel = (game: models.Game) => {
                     <li
                         className={cn(
                             carousselThumbnailStyles,
-                            carouselIndex === 2 ? activeSlide : ""
+                            carouselIndex === 2 ? activeSlide : "",
+                            "relative"
                         )}
                         onClick={() => {
                             goToSlide(2);
                         }}
                     >
+                        <span className="absolute text-4xl text-white shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <MdOutlinePlayCircle />
+                        </span>
+
                         <Image
                             src={thumbnailUrl(
                                 imagesAndVideos.videos[0][0].video_id
