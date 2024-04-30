@@ -67,7 +67,7 @@ const GameImagesCarousel = (game: models.Game) => {
                         transform: `translateX(calc(-${
                             100 * (carouselIndex - 1)
                         }%))`,
-                        transition: "transform 0.5s ease-in-out", // Adicionando transição suave
+                        transition: "transform 0.5s ease-in-out",
                     }}
                 >
                     <li className={carousselStyles}>
@@ -170,7 +170,6 @@ const GameImagesCarousel = (game: models.Game) => {
                     )}
                 </ul>
             </div>
-            <div className="mt-8 hidden md:block">10 ANOS</div>
         </div>
     );
 };

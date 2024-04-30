@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { FaRegHeart } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
 import coin from "@/public/my-nintendo-gold-coin.avif";
 import GameImagesCaroussel from "./GameImagesCaroussel";
+import ClassificacaoIndicativa from "./ClassificacaoIndicativa";
+import Button from "./Button";
 
 const GameHero = ({ game }: { game: models.Game }) => {
     return (
@@ -19,6 +21,7 @@ const GameHero = ({ game }: { game: models.Game }) => {
             <div className="flex md:flex-row flex-col gap-12">
                 <div className=" flex-[1.5_1.5_0]">
                     <GameImagesCaroussel {...game} />
+                    <ClassificacaoIndicativa />
                 </div>
                 <div className="flex-1 space-y-5">
                     <span className="border-l-[3px] pl-2 border-nintendoRed capitalize font-light text-sm">
@@ -40,9 +43,7 @@ const GameHero = ({ game }: { game: models.Game }) => {
                         </p>
                     </div>
 
-                    <button className="flex items-center text-2xl gap-3 justify-center w-full bg-nintendoRed hover:bg-[rgb(172,_0,_13)] transition-all text-white py-3 rounded-xl font-bold">
-                        <FiDownload /> Download direto
-                    </button>
+                    <Button text="Download direto" icon={<FiDownload />} />
                 </div>
             </div>
         </div>

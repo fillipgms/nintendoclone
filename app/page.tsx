@@ -9,6 +9,11 @@ export default async function Home() {
             <section className="bg-nintendoLightBlue relative">
                 <GameHero game={game[0]} />
             </section>
+            <section className="mt-28 px-52">
+                <h2 className=" text-xl font-bold text-nintendoGray">
+                    O modo Multijogador chegou ao vale!
+                </h2>
+            </section>
         </main>
     );
 }
