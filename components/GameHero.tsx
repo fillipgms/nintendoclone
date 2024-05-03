@@ -43,7 +43,11 @@ const GameHero = ({ game }: { game: models.Game }) => {
                         </p>
                     </div>
 
-                    <Button text="Download direto" icon={<FiDownload />} />
+                    <Button
+                        text="Download direto"
+                        icon={<FiDownload />}
+                        className="w-full"
+                    />
                 </div>
             </div>
         </div>

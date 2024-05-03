@@ -15,6 +15,9 @@ import { MdPerson } from "react-icons/md";
 import NintendoLogo from "@/public/NintendoLogo";
 import Image from "next/image";
 import MyNintendoStore from "@/public/MyNintendoStore";
+import Button from "./Button";
+import { FiDownload } from "react-icons/fi";
+import ScrollHeader from "./ScrollHeader";
 
 const Header = () => {
     const linkStyle =
@@ -71,7 +74,7 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
-            <div className="md:hidden bg-white fixed bottom-4 w-[95%] z-20 shadow-2xl rounded-full  left-1/2 -translate-x-1/2">
+            <div className="md:hidden bg-white fixed bottom-4 w-[95%] z-50 shadow-2xl rounded-full  left-1/2 -translate-x-1/2">
                 <ul className="flex text-3xl justify-between px-6 items-center">
                     <li>
                         <GiHamburgerMenu />
@@ -90,6 +93,7 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
+            <ScrollHeader />
         </header>
     );
 };
