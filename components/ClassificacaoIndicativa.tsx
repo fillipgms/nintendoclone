@@ -1,12 +1,13 @@
-import Classificacao from "@/public/classificacao";
+import { cn } from "@/lib/utils";
+import Classificacao from "@/public/Classificacao";
 import React from "react";
 
-const ClassificacaoIndicativa = () => {
+const ClassificacaoIndicativa = ({ className }: { className?: string }) => {
     return (
         <a
             href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/classificacao-1"
             target="_blank"
-            className="hidden md:flex items-center text-xs gap-6"
+            className={cn(className, "flex items-center text-xs gap-6")}
         >
             <Classificacao />
             <div className="flex flex-col">

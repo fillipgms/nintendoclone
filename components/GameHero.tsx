@@ -21,7 +21,7 @@ const GameHero = ({ game }: { game: models.Game }) => {
             <div className="flex md:flex-row flex-col gap-12">
                 <div className=" flex-[1.5_1.5_0]">
                     <GameImagesCaroussel {...game} />
-                    <ClassificacaoIndicativa />
+                    <ClassificacaoIndicativa className=" max-md:!hidden" />
                 </div>
                 <div className="flex-1 space-y-5">
                     <span className="border-l-[3px] pl-2 border-nintendoRed capitalize font-light text-sm">
